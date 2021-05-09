@@ -50,21 +50,28 @@ function scatterPlot() {
 
   const container = createContainer("600px", "600px");
 
-  coordinates.forEach(({ x, y }) => {
-    const dotWithEvent = createPlot(25, 25, x, y, addClickLister);
+  coordinates.forEach(({ x: xcor, y: ycor }) => {
+    const dotWithEvent = createPlot(25, 25, xcor, ycor, addClickLister);
     container.appendChild(dotWithEvent);
   });
 
   root.appendChild(container);
 }
 
-let coordinates = [
-  { x: 100, y: 200 },
-  { x: 400, y: 400 },
-  { x: 300, y: 300 },
-  { x: 400, y: 100 },
-  { x: 100, y: 500 },
-];
+let coordinates = [];
+
+// randomly generate random ammount of coordinates
+const maxcor = 8;
+const mincor = 3;
+let randomAmount = Math.floor(Math.random() * (maxcor - mincor + 1)) + mincor;
+
+while (randomAmount > 0) {
+  coordinates.push({
+    x: Math.ceil(Math.random() * 550),
+    y: Math.ceil(Math.random() * 550),
+  });
+  randomAmount--;
+}
 
 // call main function
 scatterPlot();
